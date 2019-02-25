@@ -19,3 +19,6 @@ fmt
 
 #Linux binary
 bbdcbot
+
+#logs
+*.txt

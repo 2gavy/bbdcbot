@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"math/rand"
 	"time"
+	"io"
 
 	"github.com/joho/godotenv"
 	"github.com/go-telegram-bot-api/telegram-bot-api"
@@ -17,6 +18,15 @@ import (
 
 func main() {
 	loadEnvironmentalVariables()
+
+	//log to file as well as stdout
+	f, err := os.OpenFile("output.txt", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
+	if err != nil {
+    	log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+	mw := io.MultiWriter(os.Stdout, f)
+	log.SetOutput(mw)
 
 	//set up telegram info
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("TELEGRAM_TOKEN"))
@@ -83,8 +93,8 @@ func main() {
 			}
 		}
 
-		r := rand.Intn(10)
-		time.Sleep(time.Duration(r) * time.Minute)
+		r := rand.Intn(600) + 120
+		time.Sleep(time.Duration(r) * time.Second)
 	}
 	
 
