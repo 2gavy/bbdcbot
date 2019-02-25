@@ -7,17 +7,32 @@ import (
 	"net/url"
 	"os"
 	"strings"
+	"strconv"
+	"math/rand"
+	"time"
 
 	"github.com/joho/godotenv"
+	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 func main() {
 	loadEnvironmentalVariables()
+
+	//set up telegram info
+	bot, err := tgbotapi.NewBotAPI(os.Getenv("TELEGRAM_TOKEN"))
+	errCheck(err, "Failed to start telegram bot")
+	log.Printf("Authorized on account %s", bot.Self.UserName)
+	chatID, err := strconv.ParseInt(os.Getenv("CHAT_ID"), 10, 64)
+	errCheck(err, "Failed to fetch chat ID")
+
+	
 	client := &http.Client{}
 	//fetching cookies
+	log.Println("Fetching cookies")
 	aspxanon, sessionID := fetchCookies()
 
 	//logging in
+	log.Println("Logging in")
 	loginForm := url.Values{}
 	loginForm.Add("txtNRIC", os.Getenv("NRIC"))
 	loginForm.Add("txtPassword", os.Getenv("PASSWORD"))
@@ -31,38 +46,54 @@ func main() {
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	_, err = client.Do(req)
 	errCheck(err, "Error logging in")
+	for {
+		//fetching the booking page
+		log.Println("Fetching booking page")
+		req, err = http.NewRequest("POST", "http://www.bbdc.sg/bbdc/b-3c-pLessonBooking1.asp",
+			strings.NewReader(bookingForm().Encode()))
+		req.AddCookie(aspxanon)
+		req.AddCookie(sessionID)
+		req.AddCookie(&http.Cookie{Name: "language", Value: "en-US"})
+		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+		errCheck(err, "Error creating get bookings request")
+		resp, err := client.Do(req)
+		errCheck(err, "Error fetching booking slots")
+		body, _ := ioutil.ReadAll(resp.Body)
+		//ioutil.WriteFile("booking.txt", body, 0644)
 
-	//fetching the booking page
-	req, err = http.NewRequest("POST", "http://www.bbdc.sg/bbdc/b-3c-pLessonBooking1.asp",
-		strings.NewReader(bookingForm().Encode()))
-	req.AddCookie(aspxanon)
-	req.AddCookie(sessionID)
-	req.AddCookie(&http.Cookie{Name: "language", Value: "en-US"})
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	errCheck(err, "Error creating get bookings request")
-	resp, err := client.Do(req)
-	errCheck(err, "Error fetching booking slots")
-	body, _ := ioutil.ReadAll(resp.Body)
-	//ioutil.WriteFile("booking.txt", body, 0644)
+		//parse booking page to get booking dates
+		//The data is hidden away in the following function call in the HTML page
+		//fetched:
+		//doTooltipV(event,0, "03/05/2019 (Fri)","3","11:30","13:10","BBDC");
+		log.Println("Parsing booking page")
+		substrs := strings.Split(string(body), "doTooltipV(")[1:]
+		for _, substr := range substrs {
+			bookingData := strings.Split(substr, ",")[0:6]
+			day := bookingData[2]
+			monthInt := day[5:7]
+			log.Println(day)
 
-	//parse booking page to get booking dates
-	//The data is hidden away in the following function call in the HTML page
-	//fetched:
-	//doTooltipV(event,0, "03/05/2019 (Fri)","3","11:30","13:10","BBDC");
-	substrs := strings.Split(string(body), "doTooltipV(")[1:]
-	for _, substr := range substrs {
-		bookingData := strings.Split(substr, ",")[0:6]
-		day := bookingData[2]
-		sessionNum := bookingData[3]
-		if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") || sessionNum == "\"7\"" || sessionNum == "\"8\"" {
-			alert("Slot available on " + day + " from " + bookingData[4] + " to " + bookingData[5])
+			sessionNum := bookingData[3]
+			if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") {
+				alert("Slot available on " + day + " from " + bookingData[4] + " to " + bookingData[5], 
+					bot, chatID)
+			} else if (monthInt == "02" || monthInt == "03"  || monthInt == "04") && (sessionNum == "\"7\"" || sessionNum == "\"8\""){
+				alert("Slot available on " + day + " from " + bookingData[4] + " to " + bookingData[5], 
+					bot, chatID)
+			}
 		}
+
+		r := rand.Intn(10)
+		time.Sleep(time.Duration(r) * time.Minute)
 	}
+	
 
 }
 
-func alert(msg string) {
-	log.Println(msg)
+func alert(msg string, bot *tgbotapi.BotAPI, chatID int64) {
+	telegramMsg := tgbotapi.NewMessage(chatID, msg)
+	bot.Send(telegramMsg)
+	log.Println("Sent message to " + strconv.FormatInt(chatID, 10) +": " + msg)
 }
 
 func loadEnvironmentalVariables() {
