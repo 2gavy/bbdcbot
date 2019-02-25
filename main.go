@@ -93,7 +93,7 @@ func main() {
 			}
 		}
 
-		r := rand.Intn(600) + 120
+		r := rand.Intn(300) + 120
 		time.Sleep(time.Duration(r) * time.Second)
 	}
 	
