@@ -81,7 +81,7 @@ func main() {
 			bookingData := strings.Split(substr, ",")[0:6]
 			day := bookingData[2]
 			monthInt := day[5:7]
-			log.Println(day)
+			log.Println(bookingData)
 
 			sessionNum := bookingData[3]
 			if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") {
