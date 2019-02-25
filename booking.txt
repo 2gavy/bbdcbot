@@ -1,0 +1,284 @@
+
+<DIV ID="processmsg" style="position:absolute;left:38%;top:30%;visibility:visibible"><center>
+<table cellpadding=6 border=2 bgcolor="#6487dc" bordercolor="#000000"><tr><td align="center">
+<font color="#000000" face="Trebuchet MS" size="4"><b>Loading...</b></font><br> <img src="image/await.gif" border="0"><br>
+<font color="#000000" face="Trebuchet MS" size="2">Please wait a moment</font></td></tr></table></center></DIV> 
+
+<!--<div id=processmsg style="position:absolute; z-index:3; left:400; top:200; width:200; height:50; 
+border-width:4; border-style:ridge; background-color:#CCECFF">
+<center><br><font face='Arial' Size=3><b>Processing......</b></font><br><br></center></div>-->
+
+
+
+<html>
+<head>
+<title>BBDC: Booking For 3C Practical Training</title> 
+<link rel="stylesheet" href="css/content.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<script language=javascript src="admin/inc-script/bookingToolTips.js"></script>
+<script language=javascript src="admin/inc-script/common.js"></script>
+</head>
+
+
+
+
+<body onload="verifyCheckBox();initTip();" bgcolor="#FFFFFF" marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" background="">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="top">      
+    <td><img src="image/invis.gif" width="10" height="1" border="0"></td>
+    <td width="100%" valign="top">
+    	
+    	<!-- Begin Content -->
+    	
+<!-- incLoginCheck.asp is a SSI for a standard page login check -->
+<SCRIPT LANGUAGE="javascript">
+var session = 'TRUE';
+var invalid = '';
+
+if (session != "TRUE" ){	
+	top.location.href = '/bbdc/errors/ErrorSessionEnd.asp';
+}
+//if (Request.getParameter("post") = "Y")
+//	Response.Redirect("/bbdc/errors/ErrorNavigation.asp");
+	
+//if (top == window)||(invalid == "TRUE")
+//		top.location.href = 'errors/ErrorNavigate.asp';		
+
+if (top == window)
+	top.location.href = 'errors/ErrorNavigate.asp';			
+
+</SCRIPT>
+<span id="tipDiv1" name="tipDiv1"></span>
+<SCRIPT LANGUAGE="javascript">
+var sessionAcct = '835877';
+var var_acct = parent.leftFrame.var_acct;
+ if (sessionAcct != var_acct) 
+ {
+    alert ("Your Session has logout.\nPlease Login again.");
+    top.location.href = '/bbdc/errors/ErrorSessionEnd.asp';
+ }	
+</SCRIPT>
+ 
+		<Script language='javascript'>
+			var msg = "You have other booking(s) fall under the schedule you chose.\n Do you want to view the booking records now?\n" 
+		        msg = msg + " Click Ok to view the booking records now.\n"
+		        msg = msg + " Click Cancel to proceed with booking. ";
+		        
+			var action = confirm(msg);
+				if (action == true)
+				{						
+					var r = showBooking('b-AllBookStatement.asp?from=2/1/2019&to=7/3/2019');
+				}				
+				
+		</script>
+		
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td class="pgtitle">
+			Booking For <span class="pgtitle1">3A Autocar Practical Training</span>
+		</td>
+	</tr>
+	<tr><td></td></tr>
+	<tr>
+		<td class="pgdesc" align="left">&nbsp;
+			
+		</td>
+	</tr>
+</table>
+
+
+
+<!--form action="b-3c-pLessonBookingConfirm.asp" method="post" onsubmit="return checkBookings();" name="myform" > -->
+<form action="b-3c-pLessonBookingConfirm.asp" method="post" onsubmit="" name="myform" id="myform">
+<input type="hidden" name="accId"  value="835877">
+
+	<table width="100%" border="0" cellspacing="2" cellpadding="2">
+	
+	
+	
+		<tr valign="top">
+			<td class="txtbold" align="right" nowrap>Month:</td>
+			<td class="txt" width="100%">Feb/2019, Mar/2019, Apr/2019, May/2019, Jun/2019</td>
+		</tr>
+		
+		<tr valign="top">
+			<td class="txtbold" align="right" nowrap>Session:</td>
+			<td class="txt" width="100%">1, 2, 3, 4, 5, 6, 7, 8</td>
+		</tr>
+
+		<tr valign="top">
+			<td class="txtbold" align="right" nowrap>Day:</td>
+			<td class="txt" width="100%">
+			Mon, Tue, Wed, Thur, Fri, Sat, Sun, </td>
+		</tr>
+		
+		<tr valign="top">
+			<td class="txtbold" align="right" nowrap>Group:</td>
+			<td class="txt" width="100%">G8037</td>
+		</tr>
+		
+
+		<tr valign="top">
+			<td class="txtbold" align="right" nowrap>Car Model:</td>
+			<td class="txt" width="100%">ATC</td>
+		</tr>
+		
+		
+		<tr valign="top">
+			<td class="txtbold" align="right" nowrap>&nbsp;</td>
+			<td class="txt">&nbsp;</td>
+		</tr>
+		<tr valign="top">
+			<td colspan="2" class="title">
+				<img src="image/site/icn-sqbull.gif">&nbsp;Slots Listing
+			</td>
+		</tr>
+		<tr valign="top">
+			<td colspan="2" class="comment">
+				Below are the only slots that available based on your schedule selection. 
+				Please tick to select the date and then click "<span class="commentbold">Submit</span>". 
+				Click "<span class="commentbold"><< Back</span>" to select other schedule.
+				Click "<span class="commentbold">View Booking</span>" to view valid unattended booking based on the schedule you selected.<br>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td colspan="2" width="1" height="3">
+				<spacer type="block" width="1" height="1">
+			</td>
+		</tr>
+		
+ 	
+		<tr valign="top">
+			<td colspan="2">
+				<table width="100%" border="0" cellspacing="1" cellpadding="2" bgcolor="#666666">
+					<tr class="hrtitle">
+						<td width="1%" class="txtbold" align="center">
+							Date
+						</td>
+						
+						<!- ->
+						<td width="5%" class="txtbold" align="center">
+							Venue
+						</td>
+						<!- ->
+						
+						
+						<!-- Start listing Session header, Choosen and 
+						     posted from previous page -->
+						
+						    <td width="5%" class="txtbold" align="center">
+						      Session 1
+
+						    </td>
+						
+						    <td width="5%" class="txtbold" align="center">
+						      Session 2
+
+						    </td>
+						
+						    <td width="5%" class="txtbold" align="center">
+						      Session 3
+
+						    </td>
+						
+						    <td width="5%" class="txtbold" align="center">
+						      Session 4
+
+						    </td>
+						
+						    <td width="5%" class="txtbold" align="center">
+						      Session 5
+
+						    </td>
+						
+						    <td width="5%" class="txtbold" align="center">
+						      Session 6
+
+						    </td>
+						
+						    <td width="5%" class="txtbold" align="center">
+						      Session 7
+
+						    </td>
+						
+						    <td width="5%" class="txtbold" align="center">
+						      Session 8
+
+						    </td>
+						
+						<!-- end of session header listing -->
+						
+					</tr>
+					<tr>
+  			        <!-- start listing all session per day here -->
+					<td id='varSlotCount' name='varSlotCount' value=0></td><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >03/05/2019<BR>Fri</td><td class='txtbold' align='center'>BBDC</td><td></td><td></td><td id='cell68_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "03/05/2019 (Fri)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell68_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell68_2")'><input type="checkbox" id="68_2" name="slot" value="1886545" onclick="SetCountAndToggleColor('cell68_2', 'varSlotCount')"></td><td></td><td id='cell68_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "03/05/2019 (Fri)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell68_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell68_4")'><input type="checkbox" id="68_4" name="slot" value="1886567" onclick="SetCountAndToggleColor('cell68_4', 'varSlotCount')"></td><td></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >07/05/2019<BR>Tue</td><td class='txtbold' align='center'>BBDC</td><td></td><td></td><td></td><td></td><td id='cell72_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "07/05/2019 (Tue)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell72_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell72_4")'><input type="checkbox" id="72_4" name="slot" value="1887513" onclick="SetCountAndToggleColor('cell72_4', 'varSlotCount')"></td><td></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >08/05/2019<BR>Wed</td><td class='txtbold' align='center'>BBDC</td><td></td><td id='cell73_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "08/05/2019 (Wed)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell73_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell73_1")'><input type="checkbox" id="73_1" name="slot" value="1886644" onclick="SetCountAndToggleColor('cell73_1', 'varSlotCount')"></td><td></td><td></td><td id='cell73_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "08/05/2019 (Wed)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell73_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell73_4")'><input type="checkbox" id="73_4" name="slot" value="1886677" onclick="SetCountAndToggleColor('cell73_4', 'varSlotCount')"></td><td id='cell73_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "08/05/2019 (Wed)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell73_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell73_5")'><input type="checkbox" id="73_5" name="slot" value="1887711" onclick="SetCountAndToggleColor('cell73_5', 'varSlotCount')"></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >09/05/2019<BR>Thur</td><td class='txtbold' align='center'>BBDC</td><td id='cell74_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "09/05/2019 (Thur)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell74_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell74_0")'><input type="checkbox" id="74_0" name="slot" value="1886688" onclick="SetCountAndToggleColor('cell74_0', 'varSlotCount')"></td><td id='cell74_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "09/05/2019 (Thur)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell74_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell74_1")'><input type="checkbox" id="74_1" name="slot" value="1886699" onclick="SetCountAndToggleColor('cell74_1', 'varSlotCount')"></td><td id='cell74_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "09/05/2019 (Thur)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell74_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell74_2")'><input type="checkbox" id="74_2" name="slot" value="1886710" onclick="SetCountAndToggleColor('cell74_2', 'varSlotCount')"></td><td></td><td id='cell74_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "09/05/2019 (Thur)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell74_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell74_4")'><input type="checkbox" id="74_4" name="slot" value="1886732" onclick="SetCountAndToggleColor('cell74_4', 'varSlotCount')"></td><td></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >10/05/2019<BR>Fri</td><td class='txtbold' align='center'>BBDC</td><td id='cell75_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "10/05/2019 (Fri)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell75_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell75_0")'><input type="checkbox" id="75_0" name="slot" value="1886743" onclick="SetCountAndToggleColor('cell75_0', 'varSlotCount')"></td><td id='cell75_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "10/05/2019 (Fri)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell75_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell75_1")'><input type="checkbox" id="75_1" name="slot" value="1886754" onclick="SetCountAndToggleColor('cell75_1', 'varSlotCount')"></td><td id='cell75_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "10/05/2019 (Fri)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell75_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell75_2")'><input type="checkbox" id="75_2" name="slot" value="1886765" onclick="SetCountAndToggleColor('cell75_2', 'varSlotCount')"></td><td></td><td id='cell75_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "10/05/2019 (Fri)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell75_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell75_4")'><input type="checkbox" id="75_4" name="slot" value="1886787" onclick="SetCountAndToggleColor('cell75_4', 'varSlotCount')"></td><td></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >13/05/2019<BR>Mon</td><td class='txtbold' align='center'>BBDC</td><td></td><td id='cell78_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "13/05/2019 (Mon)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell78_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell78_1")'><input type="checkbox" id="78_1" name="slot" value="1886809" onclick="SetCountAndToggleColor('cell78_1', 'varSlotCount')"></td><td id='cell78_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "13/05/2019 (Mon)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell78_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell78_2")'><input type="checkbox" id="78_2" name="slot" value="1886820" onclick="SetCountAndToggleColor('cell78_2', 'varSlotCount')"></td><td></td><td id='cell78_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "13/05/2019 (Mon)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell78_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell78_4")'><input type="checkbox" id="78_4" name="slot" value="1886842" onclick="SetCountAndToggleColor('cell78_4', 'varSlotCount')"></td><td id='cell78_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "13/05/2019 (Mon)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell78_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell78_5")'><input type="checkbox" id="78_5" name="slot" value="1887777" onclick="SetCountAndToggleColor('cell78_5', 'varSlotCount')"></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >14/05/2019<BR>Tue</td><td class='txtbold' align='center'>BBDC</td><td></td><td id='cell79_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "14/05/2019 (Tue)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell79_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell79_1")'><input type="checkbox" id="79_1" name="slot" value="1887535" onclick="SetCountAndToggleColor('cell79_1', 'varSlotCount')"></td><td id='cell79_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "14/05/2019 (Tue)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell79_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell79_2")'><input type="checkbox" id="79_2" name="slot" value="1887425" onclick="SetCountAndToggleColor('cell79_2', 'varSlotCount')"></td><td></td><td id='cell79_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "14/05/2019 (Tue)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell79_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell79_4")'><input type="checkbox" id="79_4" name="slot" value="1887546" onclick="SetCountAndToggleColor('cell79_4', 'varSlotCount')"></td><td id='cell79_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "14/05/2019 (Tue)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell79_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell79_5")'><input type="checkbox" id="79_5" name="slot" value="1887799" onclick="SetCountAndToggleColor('cell79_5', 'varSlotCount')"></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >15/05/2019<BR>Wed</td><td class='txtbold' align='center'>BBDC</td><td></td><td id='cell80_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "15/05/2019 (Wed)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell80_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell80_1")'><input type="checkbox" id="80_1" name="slot" value="1886864" onclick="SetCountAndToggleColor('cell80_1', 'varSlotCount')"></td><td id='cell80_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "15/05/2019 (Wed)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell80_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell80_2")'><input type="checkbox" id="80_2" name="slot" value="1886875" onclick="SetCountAndToggleColor('cell80_2', 'varSlotCount')"></td><td></td><td id='cell80_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "15/05/2019 (Wed)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell80_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell80_4")'><input type="checkbox" id="80_4" name="slot" value="1886897" onclick="SetCountAndToggleColor('cell80_4', 'varSlotCount')"></td><td id='cell80_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "15/05/2019 (Wed)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell80_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell80_5")'><input type="checkbox" id="80_5" name="slot" value="1887821" onclick="SetCountAndToggleColor('cell80_5', 'varSlotCount')"></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >16/05/2019<BR>Thur</td><td class='txtbold' align='center'>BBDC</td><td id='cell81_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "16/05/2019 (Thur)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell81_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell81_0")'><input type="checkbox" id="81_0" name="slot" value="1886908" onclick="SetCountAndToggleColor('cell81_0', 'varSlotCount')"></td><td id='cell81_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "16/05/2019 (Thur)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell81_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell81_1")'><input type="checkbox" id="81_1" name="slot" value="1886919" onclick="SetCountAndToggleColor('cell81_1', 'varSlotCount')"></td><td id='cell81_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "16/05/2019 (Thur)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell81_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell81_2")'><input type="checkbox" id="81_2" name="slot" value="1886930" onclick="SetCountAndToggleColor('cell81_2', 'varSlotCount')"></td><td></td><td id='cell81_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "16/05/2019 (Thur)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell81_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell81_4")'><input type="checkbox" id="81_4" name="slot" value="1886952" onclick="SetCountAndToggleColor('cell81_4', 'varSlotCount')"></td><td id='cell81_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "16/05/2019 (Thur)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell81_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell81_5")'><input type="checkbox" id="81_5" name="slot" value="1887843" onclick="SetCountAndToggleColor('cell81_5', 'varSlotCount')"></td><td id='cell81_6' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "16/05/2019 (Thur)","7","19:20","21:00","BBDC"); SetMouseOverToggleColor("cell81_6") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell81_6")'><input type="checkbox" id="81_6" name="slot" value="1887854" onclick="SetCountAndToggleColor('cell81_6', 'varSlotCount')"></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >17/05/2019<BR>Fri</td><td class='txtbold' align='center'>BBDC</td><td id='cell82_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "17/05/2019 (Fri)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell82_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell82_0")'><input type="checkbox" id="82_0" name="slot" value="1886963" onclick="SetCountAndToggleColor('cell82_0', 'varSlotCount')"></td><td id='cell82_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "17/05/2019 (Fri)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell82_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell82_1")'><input type="checkbox" id="82_1" name="slot" value="1886974" onclick="SetCountAndToggleColor('cell82_1', 'varSlotCount')"></td><td id='cell82_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "17/05/2019 (Fri)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell82_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell82_2")'><input type="checkbox" id="82_2" name="slot" value="1886985" onclick="SetCountAndToggleColor('cell82_2', 'varSlotCount')"></td><td></td><td id='cell82_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "17/05/2019 (Fri)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell82_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell82_4")'><input type="checkbox" id="82_4" name="slot" value="1887007" onclick="SetCountAndToggleColor('cell82_4', 'varSlotCount')"></td><td id='cell82_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "17/05/2019 (Fri)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell82_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell82_5")'><input type="checkbox" id="82_5" name="slot" value="1887865" onclick="SetCountAndToggleColor('cell82_5', 'varSlotCount')"></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >20/05/2019<BR>Mon</td><td class='txtbold' align='center'>BBDC</td><td></td><td></td><td id='cell85_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "20/05/2019 (Mon)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell85_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell85_2")'><input type="checkbox" id="85_2" name="slot" value="1891393" onclick="SetCountAndToggleColor('cell85_2', 'varSlotCount')"></td><td></td><td></td><td></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >21/05/2019<BR>Tue</td><td class='txtbold' align='center'>BBDC</td><td id='cell86_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "21/05/2019 (Tue)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell86_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell86_0")'><input type="checkbox" id="86_0" name="slot" value="1887557" onclick="SetCountAndToggleColor('cell86_0', 'varSlotCount')"></td><td id='cell86_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "21/05/2019 (Tue)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell86_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell86_1")'><input type="checkbox" id="86_1" name="slot" value="1887568" onclick="SetCountAndToggleColor('cell86_1', 'varSlotCount')"></td><td id='cell86_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "21/05/2019 (Tue)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell86_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell86_2")'><input type="checkbox" id="86_2" name="slot" value="1887447" onclick="SetCountAndToggleColor('cell86_2', 'varSlotCount')"></td><td></td><td id='cell86_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "21/05/2019 (Tue)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell86_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell86_4")'><input type="checkbox" id="86_4" name="slot" value="1887579" onclick="SetCountAndToggleColor('cell86_4', 'varSlotCount')"></td><td id='cell86_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "21/05/2019 (Tue)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell86_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell86_5")'><input type="checkbox" id="86_5" name="slot" value="1887887" onclick="SetCountAndToggleColor('cell86_5', 'varSlotCount')"></td><td id='cell86_6' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "21/05/2019 (Tue)","7","19:20","21:00","BBDC"); SetMouseOverToggleColor("cell86_6") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell86_6")'><input type="checkbox" id="86_6" name="slot" value="1887898" onclick="SetCountAndToggleColor('cell86_6', 'varSlotCount')"></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >22/05/2019<BR>Wed</td><td class='txtbold' align='center'>BBDC</td><td id='cell87_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "22/05/2019 (Wed)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell87_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell87_0")'><input type="checkbox" id="87_0" name="slot" value="1887018" onclick="SetCountAndToggleColor('cell87_0', 'varSlotCount')"></td><td id='cell87_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "22/05/2019 (Wed)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell87_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell87_1")'><input type="checkbox" id="87_1" name="slot" value="1887029" onclick="SetCountAndToggleColor('cell87_1', 'varSlotCount')"></td><td id='cell87_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "22/05/2019 (Wed)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell87_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell87_2")'><input type="checkbox" id="87_2" name="slot" value="1887040" onclick="SetCountAndToggleColor('cell87_2', 'varSlotCount')"></td><td></td><td id='cell87_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "22/05/2019 (Wed)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell87_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell87_4")'><input type="checkbox" id="87_4" name="slot" value="1887062" onclick="SetCountAndToggleColor('cell87_4', 'varSlotCount')"></td><td id='cell87_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "22/05/2019 (Wed)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell87_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell87_5")'><input type="checkbox" id="87_5" name="slot" value="1887909" onclick="SetCountAndToggleColor('cell87_5', 'varSlotCount')"></td><td></td><td id='cell87_7' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "22/05/2019 (Wed)","8","21:10","22:50","BBDC"); SetMouseOverToggleColor("cell87_7") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell87_7")'><input type="checkbox" id="87_7" name="slot" value="1888195" onclick="SetCountAndToggleColor('cell87_7', 'varSlotCount')"></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >23/05/2019<BR>Thur</td><td class='txtbold' align='center'>BBDC</td><td id='cell88_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "23/05/2019 (Thur)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell88_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell88_0")'><input type="checkbox" id="88_0" name="slot" value="1887073" onclick="SetCountAndToggleColor('cell88_0', 'varSlotCount')"></td><td id='cell88_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "23/05/2019 (Thur)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell88_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell88_1")'><input type="checkbox" id="88_1" name="slot" value="1887084" onclick="SetCountAndToggleColor('cell88_1', 'varSlotCount')"></td><td id='cell88_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "23/05/2019 (Thur)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell88_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell88_2")'><input type="checkbox" id="88_2" name="slot" value="1887095" onclick="SetCountAndToggleColor('cell88_2', 'varSlotCount')"></td><td></td><td id='cell88_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "23/05/2019 (Thur)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell88_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell88_4")'><input type="checkbox" id="88_4" name="slot" value="1887117" onclick="SetCountAndToggleColor('cell88_4', 'varSlotCount')"></td><td id='cell88_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "23/05/2019 (Thur)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell88_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell88_5")'><input type="checkbox" id="88_5" name="slot" value="1887931" onclick="SetCountAndToggleColor('cell88_5', 'varSlotCount')"></td><td></td><td></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >24/05/2019<BR>Fri</td><td class='txtbold' align='center'>BBDC</td><td id='cell89_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "24/05/2019 (Fri)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell89_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell89_0")'><input type="checkbox" id="89_0" name="slot" value="1887128" onclick="SetCountAndToggleColor('cell89_0', 'varSlotCount')"></td><td id='cell89_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "24/05/2019 (Fri)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell89_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell89_1")'><input type="checkbox" id="89_1" name="slot" value="1887139" onclick="SetCountAndToggleColor('cell89_1', 'varSlotCount')"></td><td id='cell89_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "24/05/2019 (Fri)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell89_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell89_2")'><input type="checkbox" id="89_2" name="slot" value="1887150" onclick="SetCountAndToggleColor('cell89_2', 'varSlotCount')"></td><td></td><td id='cell89_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "24/05/2019 (Fri)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell89_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell89_4")'><input type="checkbox" id="89_4" name="slot" value="1887172" onclick="SetCountAndToggleColor('cell89_4', 'varSlotCount')"></td><td id='cell89_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "24/05/2019 (Fri)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell89_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell89_5")'><input type="checkbox" id="89_5" name="slot" value="1887953" onclick="SetCountAndToggleColor('cell89_5', 'varSlotCount')"></td><td></td><td id='cell89_7' class='txt' align='center' bgcolor='white' ></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >27/05/2019<BR>Mon</td><td class='txtbold' align='center'>BBDC</td><td id='cell92_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "27/05/2019 (Mon)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell92_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell92_0")'><input type="checkbox" id="92_0" name="slot" value="1887183" onclick="SetCountAndToggleColor('cell92_0', 'varSlotCount')"></td><td></td><td id='cell92_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "27/05/2019 (Mon)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell92_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell92_2")'><input type="checkbox" id="92_2" name="slot" value="1887205" onclick="SetCountAndToggleColor('cell92_2', 'varSlotCount')"></td><td id='cell92_3' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "27/05/2019 (Mon)","4","13:20","15:00","BBDC"); SetMouseOverToggleColor("cell92_3") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell92_3")'><input type="checkbox" id="92_3" name="slot" value="1887216" onclick="SetCountAndToggleColor('cell92_3', 'varSlotCount')"></td><td id='cell92_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "27/05/2019 (Mon)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell92_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell92_4")'><input type="checkbox" id="92_4" name="slot" value="1887227" onclick="SetCountAndToggleColor('cell92_4', 'varSlotCount')"></td><td id='cell92_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "27/05/2019 (Mon)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell92_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell92_5")'><input type="checkbox" id="92_5" name="slot" value="1887975" onclick="SetCountAndToggleColor('cell92_5', 'varSlotCount')"></td><td></td><td id='cell92_7' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "27/05/2019 (Mon)","8","21:10","22:50","BBDC"); SetMouseOverToggleColor("cell92_7") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell92_7")'><input type="checkbox" id="92_7" name="slot" value="1888217" onclick="SetCountAndToggleColor('cell92_7', 'varSlotCount')"></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >28/05/2019<BR>Tue</td><td class='txtbold' align='center'>BBDC</td><td id='cell93_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "28/05/2019 (Tue)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell93_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell93_0")'><input type="checkbox" id="93_0" name="slot" value="1887590" onclick="SetCountAndToggleColor('cell93_0', 'varSlotCount')"></td><td id='cell93_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "28/05/2019 (Tue)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell93_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell93_1")'><input type="checkbox" id="93_1" name="slot" value="1887601" onclick="SetCountAndToggleColor('cell93_1', 'varSlotCount')"></td><td id='cell93_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "28/05/2019 (Tue)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell93_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell93_2")'><input type="checkbox" id="93_2" name="slot" value="1887469" onclick="SetCountAndToggleColor('cell93_2', 'varSlotCount')"></td><td></td><td id='cell93_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "28/05/2019 (Tue)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell93_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell93_4")'><input type="checkbox" id="93_4" name="slot" value="1887612" onclick="SetCountAndToggleColor('cell93_4', 'varSlotCount')"></td><td id='cell93_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "28/05/2019 (Tue)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell93_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell93_5")'><input type="checkbox" id="93_5" name="slot" value="1887997" onclick="SetCountAndToggleColor('cell93_5', 'varSlotCount')"></td><td></td><td id='cell93_7' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "28/05/2019 (Tue)","8","21:10","22:50","BBDC"); SetMouseOverToggleColor("cell93_7") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell93_7")'><input type="checkbox" id="93_7" name="slot" value="1888228" onclick="SetCountAndToggleColor('cell93_7', 'varSlotCount')"></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >29/05/2019<BR>Wed</td><td class='txtbold' align='center'>BBDC</td><td id='cell94_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "29/05/2019 (Wed)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell94_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell94_0")'><input type="checkbox" id="94_0" name="slot" value="1887238" onclick="SetCountAndToggleColor('cell94_0', 'varSlotCount')"></td><td id='cell94_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "29/05/2019 (Wed)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell94_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell94_1")'><input type="checkbox" id="94_1" name="slot" value="1887249" onclick="SetCountAndToggleColor('cell94_1', 'varSlotCount')"></td><td id='cell94_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "29/05/2019 (Wed)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell94_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell94_2")'><input type="checkbox" id="94_2" name="slot" value="1887260" onclick="SetCountAndToggleColor('cell94_2', 'varSlotCount')"></td><td></td><td id='cell94_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "29/05/2019 (Wed)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell94_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell94_4")'><input type="checkbox" id="94_4" name="slot" value="1887282" onclick="SetCountAndToggleColor('cell94_4', 'varSlotCount')"></td><td id='cell94_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "29/05/2019 (Wed)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell94_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell94_5")'><input type="checkbox" id="94_5" name="slot" value="1888019" onclick="SetCountAndToggleColor('cell94_5', 'varSlotCount')"></td><td></td><td id='cell94_7' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "29/05/2019 (Wed)","8","21:10","22:50","BBDC"); SetMouseOverToggleColor("cell94_7") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell94_7")'><input type="checkbox" id="94_7" name="slot" value="1888239" onclick="SetCountAndToggleColor('cell94_7', 'varSlotCount')"></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >30/05/2019<BR>Thur</td><td class='txtbold' align='center'>BBDC</td><td id='cell95_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "30/05/2019 (Thur)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell95_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell95_0")'><input type="checkbox" id="95_0" name="slot" value="1887293" onclick="SetCountAndToggleColor('cell95_0', 'varSlotCount')"></td><td id='cell95_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "30/05/2019 (Thur)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell95_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell95_1")'><input type="checkbox" id="95_1" name="slot" value="1887304" onclick="SetCountAndToggleColor('cell95_1', 'varSlotCount')"></td><td id='cell95_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "30/05/2019 (Thur)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell95_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell95_2")'><input type="checkbox" id="95_2" name="slot" value="1887315" onclick="SetCountAndToggleColor('cell95_2', 'varSlotCount')"></td><td></td><td id='cell95_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "30/05/2019 (Thur)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell95_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell95_4")'><input type="checkbox" id="95_4" name="slot" value="1887337" onclick="SetCountAndToggleColor('cell95_4', 'varSlotCount')"></td><td id='cell95_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "30/05/2019 (Thur)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell95_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell95_5")'><input type="checkbox" id="95_5" name="slot" value="1888041" onclick="SetCountAndToggleColor('cell95_5', 'varSlotCount')"></td><td></td><td id='cell95_7' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "30/05/2019 (Thur)","8","21:10","22:50","BBDC"); SetMouseOverToggleColor("cell95_7") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell95_7")'><input type="checkbox" id="95_7" name="slot" value="1888305" onclick="SetCountAndToggleColor('cell95_7', 'varSlotCount')"></td></tr><tr bgcolor='#FFFFFF'><td class='txtbold' align='center'  >31/05/2019<BR>Fri</td><td class='txtbold' align='center'>BBDC</td><td id='cell96_0' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "31/05/2019 (Fri)","1","07:30","09:10","BBDC"); SetMouseOverToggleColor("cell96_0") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell96_0")'><input type="checkbox" id="96_0" name="slot" value="1887348" onclick="SetCountAndToggleColor('cell96_0', 'varSlotCount')"></td><td id='cell96_1' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "31/05/2019 (Fri)","2","09:20","11:00","BBDC"); SetMouseOverToggleColor("cell96_1") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell96_1")'><input type="checkbox" id="96_1" name="slot" value="1887359" onclick="SetCountAndToggleColor('cell96_1', 'varSlotCount')"></td><td id='cell96_2' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "31/05/2019 (Fri)","3","11:30","13:10","BBDC"); SetMouseOverToggleColor("cell96_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell96_2")'><input type="checkbox" id="96_2" name="slot" value="1887370" onclick="SetCountAndToggleColor('cell96_2', 'varSlotCount')"></td><td></td><td id='cell96_4' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "31/05/2019 (Fri)","5","15:20","17:00","BBDC"); SetMouseOverToggleColor("cell96_4") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell96_4")'><input type="checkbox" id="96_4" name="slot" value="1887392" onclick="SetCountAndToggleColor('cell96_4', 'varSlotCount')"></td><td id='cell96_5' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "31/05/2019 (Fri)","6","17:10","18:50","BBDC"); SetMouseOverToggleColor("cell96_5") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell96_5")'><input type="checkbox" id="96_5" name="slot" value="1888063" onclick="SetCountAndToggleColor('cell96_5', 'varSlotCount')"></td><td></td><td id='cell96_7' class='txtbold' align='center' bgcolor='white' onmouseover='doTooltipV(event,0, "31/05/2019 (Fri)","8","21:10","22:50","BBDC"); SetMouseOverToggleColor("cell96_7") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell96_7")'><input type="checkbox" id="96_7" name="slot" value="1888250" onclick="SetCountAndToggleColor('cell96_7', 'varSlotCount')"></td></tr>
+					<!-- end of listing all session per days -->
+					
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td class="txtbold" align="right" nowrap>
+				&nbsp;
+			</td>
+			<td class="txt" width="100%">
+				&nbsp;
+			</td>
+		</tr>
+
+	</table>
+	<table>
+	<tr valign="top">
+			<td class="txtbold" nowrap>
+				<input type="button" name="" value="<< Back" class="btn" onclick="javascript:history.go(-1);" onmouseover="blueBtnOver(this)" onmouseout="blueBtnOut(this)">				
+				<!--<input type="button" name="btnSubmit" value="Submit" class="btn"  onmouseover="blueBtnOver(this)" onmouseout="blueBtnOut(this)" onclick="if (document.all) { postBookingPDI('varSlotCount', this.form, 'b-3c-pLessonBookingConfirm.asp', '', 'Please select a slot to book.')}else {postBookingPDIfox(this.form, 'b-3c-pLessonBookingConfirm.asp', '', 'Please select a slot to book.')}">-->
+				<input type="button" name="btnSubmit" value="Submit" class="btn"  onmouseover="blueBtnOver(this)" onmouseout="blueBtnOut(this)" onclick="postBookingPDI('varSlotCount', this.form, 'b-3c-pLessonBookingConfirm.asp', '', 'Please select a slot to book.')"> 
+				
+			</td>
+			<td class="txtbold" nowrap align="right">				
+				<input type="button" name="btnShow" value="View Booking Records" class="btn1" onclick="javascript:showBooking('b-AllBookStatement.asp?from=2/1/2019&to=7/3/2019');" onmouseover="whiteBtnOver(this)" onmouseout="whiteBtnOut(this)">
+			</td>
+		</tr>
+		<tr valign="top">
+			<td class="txtbold" align="right" nowrap>
+				&nbsp;
+			</td>
+			<td class="txt" width="100%">
+				&nbsp;
+			</td>
+		</tr>
+	</table>		
+	<script>
+	function getval()
+{
+getval=this.varSlotCount.value;
+}
+	</script>
+</form>
+
+
+    	<!-- End Content -->    
+    </td>
+  </tr>
+</table>
+
+<div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
+</body>
+</html>
+
+<head>
+<META Http-Equiv="Cache-Control" Content="no-cache">
+<META Http-Equiv="Pragma" Content="no-cache">
+<META Http-Equiv="Expires" Content="-1">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="EXPIRES" CONTENT="-1"> 
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CHACHE">
+</head>
+<script>if (document.all) document.all.processmsg.style.visibility='hidden';</script>
+<script>if (document.layers) document.processmsg.visibility='hidden'</script>
+<script>if (document.getElementById) document.getElementById('processmsg').style.visibility='hidden'</script>
+
