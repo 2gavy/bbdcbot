@@ -1,28 +1,28 @@
 package main
 
 import (
+	"io"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"os"
-	"strings"
 	"strconv"
-	"math/rand"
+	"strings"
 	"time"
-	"io"
 
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/joho/godotenv"
-	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 func main() {
 	loadEnvironmentalVariables()
 
 	//log to file as well as stdout
-	f, err := os.OpenFile("output.txt", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
+	f, err := os.OpenFile("output.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
-    	log.Fatalf("error opening file: %v", err)
+		log.Fatalf("error opening file: %v", err)
 	}
 	defer f.Close()
 	mw := io.MultiWriter(os.Stdout, f)
@@ -35,7 +35,6 @@ func main() {
 	chatID, err := strconv.ParseInt(os.Getenv("CHAT_ID"), 10, 64)
 	errCheck(err, "Failed to fetch chat ID")
 
-	
 	client := &http.Client{}
 	//fetching cookies
 	log.Println("Fetching cookies")
@@ -85,10 +84,10 @@ func main() {
 
 			sessionNum := bookingData[3]
 			if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") {
-				alert("Slot available on " + day + " from " + bookingData[4] + " to " + bookingData[5], 
+				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
 					bot, chatID)
-			} else if (monthInt == "02" || monthInt == "03"  || monthInt == "04") && (sessionNum == "\"7\"" || sessionNum == "\"8\""){
-				alert("Slot available on " + day + " from " + bookingData[4] + " to " + bookingData[5], 
+			} else if (monthInt == "02" || monthInt == "03" || monthInt == "04") && (sessionNum == "\"7\"" || sessionNum == "\"8\"") {
+				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
 					bot, chatID)
 			}
 		}
@@ -96,14 +95,13 @@ func main() {
 		r := rand.Intn(300) + 120
 		time.Sleep(time.Duration(r) * time.Second)
 	}
-	
 
 }
 
 func alert(msg string, bot *tgbotapi.BotAPI, chatID int64) {
 	telegramMsg := tgbotapi.NewMessage(chatID, msg)
 	bot.Send(telegramMsg)
-	log.Println("Sent message to " + strconv.FormatInt(chatID, 10) +": " + msg)
+	log.Println("Sent message to " + strconv.FormatInt(chatID, 10) + ": " + msg)
 }
 
 func loadEnvironmentalVariables() {
