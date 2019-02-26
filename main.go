@@ -75,12 +75,12 @@ func main() {
 		//fetched:
 		//doTooltipV(event,0, "03/05/2019 (Fri)","3","11:30","13:10","BBDC");
 		log.Println("Parsing booking page")
+		alert("Checking for slots...", bot, chatID)
 		substrs := strings.Split(string(body), "doTooltipV(")[1:]
 		for _, substr := range substrs {
 			bookingData := strings.Split(substr, ",")[0:6]
 			day := bookingData[2]
 			monthInt := day[5:7]
-			log.Println(bookingData)
 
 			sessionNum := bookingData[3]
 			if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") {
@@ -91,7 +91,6 @@ func main() {
 					bot, chatID)
 			}
 		}
-
 		r := rand.Intn(300) + 120
 		time.Sleep(time.Duration(r) * time.Second)
 	}
