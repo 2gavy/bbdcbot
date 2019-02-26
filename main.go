@@ -36,25 +36,6 @@ func main() {
 	errCheck(err, "Failed to fetch chat ID")
 
 	client := &http.Client{}
-	//fetching cookies
-	log.Println("Fetching cookies")
-	aspxanon, sessionID := fetchCookies()
-
-	//logging in
-	log.Println("Logging in")
-	loginForm := url.Values{}
-	loginForm.Add("txtNRIC", os.Getenv("NRIC"))
-	loginForm.Add("txtPassword", os.Getenv("PASSWORD"))
-	loginForm.Add("btnLogin", " ")
-	req, err := http.NewRequest("POST", "http://www.bbdc.sg/bbdc/bbdc_web/header2.asp",
-		strings.NewReader(loginForm.Encode()))
-	errCheck(err, "Error creating log in request")
-	req.AddCookie(aspxanon)
-	req.AddCookie(sessionID)
-	req.AddCookie(&http.Cookie{Name: "language", Value: "en-US"})
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	_, err = client.Do(req)
-	errCheck(err, "Error logging in")
 
 	//for heroku
 	go func() {
@@ -62,6 +43,26 @@ func main() {
 			http.HandlerFunc(http.NotFound))
 	}()
 	for {
+		//fetching cookies
+		log.Println("Fetching cookies")
+		aspxanon, sessionID := fetchCookies()
+
+		//logging in
+		log.Println("Logging in")
+		loginForm := url.Values{}
+		loginForm.Add("txtNRIC", os.Getenv("NRIC"))
+		loginForm.Add("txtPassword", os.Getenv("PASSWORD"))
+		loginForm.Add("btnLogin", " ")
+		req, err := http.NewRequest("POST", "http://www.bbdc.sg/bbdc/bbdc_web/header2.asp",
+			strings.NewReader(loginForm.Encode()))
+		errCheck(err, "Error creating log in request")
+		req.AddCookie(aspxanon)
+		req.AddCookie(sessionID)
+		req.AddCookie(&http.Cookie{Name: "language", Value: "en-US"})
+		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+		_, err = client.Do(req)
+		errCheck(err, "Error logging in")
+		
 		//fetching the booking page
 		log.Println("Fetching booking page")
 		req, err = http.NewRequest("POST", "http://www.bbdc.sg/bbdc/b-3c-pLessonBooking1.asp",
