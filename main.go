@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	//loadEnvironmentalVariables()
+	loadEnvironmentalVariables()
 
 	//log to file as well as stdout
 	f, err := os.OpenFile("output.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -55,6 +55,12 @@ func main() {
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	_, err = client.Do(req)
 	errCheck(err, "Error logging in")
+
+	//for heroku
+	go func() {
+		http.ListenAndServe(":"+os.Getenv("PORT"),
+			http.HandlerFunc(http.NotFound))
+	}()
 	for {
 		//fetching the booking page
 		log.Println("Fetching booking page")
@@ -93,8 +99,11 @@ func main() {
 				foundSlot = true
 			}
 		}
+
 		if foundSlot {
 			alert("Finished getting slots", bot, chatID)
+		} else {
+			log.Println("No slots found")
 		}
 		r := rand.Intn(300) + 120
 		time.Sleep(time.Duration(r) * time.Second)
