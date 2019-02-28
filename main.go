@@ -90,7 +90,7 @@ func main() {
 			monthInt := day[5:7]
 
 			sessionNum := bookingData[3]
-			if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") && (monthInt == "02" || monthInt == "03" || monthInt == "04" || monthInt == "05") {
+			if (strings.Contains(day, "Sat") || strings.Contains(day, "Sun")) && (monthInt == "02" || monthInt == "03" || monthInt == "04" || monthInt == "05") {
 				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
 					bot, chatID)
 				foundSlot = true
