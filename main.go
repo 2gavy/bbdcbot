@@ -62,7 +62,7 @@ func main() {
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 		_, err = client.Do(req)
 		errCheck(err, "Error logging in")
-		
+
 		//fetching the booking page
 		log.Println("Fetching booking page")
 		req, err = http.NewRequest("POST", "http://www.bbdc.sg/bbdc/b-3c-pLessonBooking1.asp",
@@ -90,7 +90,7 @@ func main() {
 			monthInt := day[5:7]
 
 			sessionNum := bookingData[3]
-			if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") {
+			if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") && (monthInt == "02" || monthInt == "03" || monthInt == "04" || monthInt == "05") {
 				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
 					bot, chatID)
 				foundSlot = true
