@@ -90,17 +90,20 @@ func main() {
 			monthInt := day[5:7]
 
 			sessionNum := bookingData[3]
+			validSlot := false
 			if (strings.Contains(day, "Sat") || strings.Contains(day, "Sun")) && (monthInt == "02" || monthInt == "03" || monthInt == "04" || monthInt == "05") {
 				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
 					bot, chatID)
 				foundSlot = true
+				validSlot = true
 			} else if (monthInt == "02" || monthInt == "03" || monthInt == "04") && (sessionNum == "\"7\"" || sessionNum == "\"8\"") {
 				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
 					bot, chatID)
 				foundSlot = true
+				validSlot = true
 			}
 
-			if foundSlot {
+			if validSlot {
 				//Check if the slot found is within 10 days to determine whether to auto book
 				layout := "02/01/2006"
 				dayProper, err := time.Parse(layout, strings.Split(strings.Split(day, "\"")[1], " ")[0])
