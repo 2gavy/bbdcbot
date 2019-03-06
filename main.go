@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	loadEnvironmentalVariables()
+	//loadEnvironmentalVariables()
 
 	//log to file as well as stdout
 	f, err := os.OpenFile("output.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -142,8 +142,8 @@ func main() {
 }
 
 func alert(msg string, bot *tgbotapi.BotAPI, chatID int64) {
-	//telegramMsg := tgbotapi.NewMessage(chatID, msg)
-	//bot.Send(telegramMsg)
+	telegramMsg := tgbotapi.NewMessage(chatID, msg)
+	bot.Send(telegramMsg)
 	log.Println("Sent message to " + strconv.FormatInt(chatID, 10) + ": " + msg)
 }
 
