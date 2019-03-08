@@ -17,8 +17,8 @@
 #test coverage
 fmt
 
-#logs
-*.txt
-
 #Linux binary
 bbdcbot
+
+#logs
+*.txt
