@@ -20,6 +20,6 @@ type Slot struct {
 //SlotService allows for interactions with the slots
 //for a particular user
 type SlotService interface {
-	Book(session Slot) (bool, error)
+	Book(slot Slot) error
 	AvailableSlots() ([]Slot, error)
 }
