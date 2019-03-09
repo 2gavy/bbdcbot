@@ -4,9 +4,9 @@ import (
 	"time"
 )
 
-//MessengerService provides a way to send users alerts
+//MessengerService provides a way to send a user alerts
 type MessengerService interface {
-	Alert(msg string, destination string) error
+	Alert(msg string) error
 }
 
 //Slot represents BBDC Driving Center slots
