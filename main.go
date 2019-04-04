@@ -116,7 +116,7 @@ func main() {
 				errCheck(err, "Error parsing date of slot")
 				daysFromNow := int(dayProper.Sub(time.Now()).Hours()/24) + 1
 
-				if daysFromNow <= 10 && weekendSlot {
+				if daysFromNow <= 10 && !weekendSlot { //no weekends allowed
 					//if the slot is today
 					//note dayProper will be at midnight of the date given
 					//so the current time will actually ahead of the day of the slot
