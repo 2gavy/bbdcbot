@@ -91,12 +91,18 @@ func main() {
 
 			sessionNum := bookingData[3]
 			validSlot := false
-			if (strings.Contains(day, "Sat") || strings.Contains(day, "Sun")) && (monthInt == "02" || monthInt == "03" || monthInt == "04" || monthInt == "05") {
+			weekendSlot := false
+
+			if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") {
+				weekendSlot = true
+			}
+
+			if (strings.Contains(day, "Sat") || strings.Contains(day, "Sun")) && (monthInt == "04" || monthInt == "05" || monthInt == "06") {
 				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
 					bot, chatID)
 				foundSlot = true
 				validSlot = true
-			} else if (monthInt == "02" || monthInt == "03" || monthInt == "04") && (sessionNum == "\"7\"" || sessionNum == "\"8\"") {
+			} else if (monthInt == "04" || monthInt == "05" || monthInt == "06") && (sessionNum == "\"7\"" || sessionNum == "\"8\"") {
 				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
 					bot, chatID)
 				foundSlot = true
@@ -110,7 +116,7 @@ func main() {
 				errCheck(err, "Error parsing date of slot")
 				daysFromNow := int(dayProper.Sub(time.Now()).Hours()/24) + 1
 
-				if daysFromNow <= 10 {
+				if daysFromNow <= 10 && weekendSlot {
 					//if the slot is today
 					//note dayProper will be at midnight of the date given
 					//so the current time will actually ahead of the day of the slot
