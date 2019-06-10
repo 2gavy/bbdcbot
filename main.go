@@ -91,10 +91,10 @@ func main() {
 
 			sessionNum := bookingData[3]
 			validSlot := false
-			weekendSlot := false
+			//weekendSlot := false
 
 			if strings.Contains(day, "Sat") || strings.Contains(day, "Sun") {
-				weekendSlot = true
+				//weekendSlot = true
 			}
 
 			if (strings.Contains(day, "Sat") || strings.Contains(day, "Sun")) && (monthInt == "04" || monthInt == "05" || monthInt == "06") {
@@ -111,43 +111,43 @@ func main() {
 
 			if validSlot {
 				//Check if the slot found is within 10 days to determine whether to auto book
-				layout := "02/01/2006"
-				dayProper, err := time.Parse(layout, strings.Split(strings.Split(day, "\"")[1], " ")[0])
-				errCheck(err, "Error parsing date of slot")
-				daysFromNow := int(dayProper.Sub(time.Now()).Hours()/24) + 1
+				//layout := "02/01/2006"
+				//dayProper, err := time.Parse(layout, strings.Split(strings.Split(day, "\"")[1], " ")[0])
+				//errCheck(err, "Error parsing date of slot")
+				//daysFromNow := int(dayProper.Sub(time.Now()).Hours()/24) + 1
+				/*
+					if daysFromNow <= 10 && !weekendSlot { //no weekends allowed
+						//if the slot is today
+						//note dayProper will be at midnight of the date given
+						//so the current time will actually ahead of the day of the slot
+						//if the slot is today, and you'll get a negative number
+						log.Printf("Entered autobook segment with daysFromNow %d and slot date %s \n", daysFromNow, day)
+						if dayProper.Sub(time.Now()).Hours() > 0 || os.Getenv("AUTOBOOK_TODAY") == "TRUE" {
+							log.Printf("Proceeded with autobook")
 
-				if daysFromNow <= 10 && !weekendSlot { //no weekends allowed
-					//if the slot is today
-					//note dayProper will be at midnight of the date given
-					//so the current time will actually ahead of the day of the slot
-					//if the slot is today, and you'll get a negative number
-					log.Printf("Entered autobook segment with daysFromNow %d and slot date %s \n", daysFromNow, day)
-					if dayProper.Sub(time.Now()).Hours() > 0 || os.Getenv("AUTOBOOK_TODAY") == "TRUE" {
-						log.Printf("Proceeded with autobook")
+							//need to get slot ID for auto-book
+							//strings.Split(substr, ",") returns- "BBDC"); SetMouseOverToggleColor("cell145_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell145_2")'><input type="checkbox" id="145_2" name="slot" value="1893904" onclick="SetCountAndToggleColor('cell145_2'
+							//splitting on value= and taking the second element returns- "1893904" onclick="SetCountAndToggleColor('cell145_2'
+							//then split on " and take the second element to get 1893904
+							slotID := strings.Split(strings.Split(strings.Split(substr, ",")[6], "value=")[1], "\"")[1]
+							log.Println("Booking slot")
+							req, err = http.NewRequest("POST", "http://www.bbdc.sg/bbdc/b-3c-pLessonBookingDetails.asp",
+								strings.NewReader(paymentForm(slotID).Encode()))
+							req.AddCookie(aspxanon)
+							req.AddCookie(sessionID)
+							req.AddCookie(&http.Cookie{Name: "language", Value: "en-US"})
+							req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+							errCheck(err, "Error creating get bookings request")
+							_, err = client.Do(req)
+							errCheck(err, "Error creating booking slot")
+							log.Println("Finished booking slot")
 
-						//need to get slot ID for auto-book
-						//strings.Split(substr, ",") returns- "BBDC"); SetMouseOverToggleColor("cell145_2") ' onmouseout='hideTip(); SetMouseOverToggleColor("cell145_2")'><input type="checkbox" id="145_2" name="slot" value="1893904" onclick="SetCountAndToggleColor('cell145_2'
-						//splitting on value= and taking the second element returns- "1893904" onclick="SetCountAndToggleColor('cell145_2'
-						//then split on " and take the second element to get 1893904
-						slotID := strings.Split(strings.Split(strings.Split(substr, ",")[6], "value=")[1], "\"")[1]
-						log.Println("Booking slot")
-						req, err = http.NewRequest("POST", "http://www.bbdc.sg/bbdc/b-3c-pLessonBookingDetails.asp",
-							strings.NewReader(paymentForm(slotID).Encode()))
-						req.AddCookie(aspxanon)
-						req.AddCookie(sessionID)
-						req.AddCookie(&http.Cookie{Name: "language", Value: "en-US"})
-						req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-						errCheck(err, "Error creating get bookings request")
-						_, err = client.Do(req)
-						errCheck(err, "Error creating booking slot")
-						log.Println("Finished booking slot")
+							alert("Auto-booked the slot as it was within 10 days of the current date", bot, chatID)
+						} else {
+							log.Printf("Did not proceed with autobook as time till event was %f \n", dayProper.Sub(time.Now()).Hours())
+						}
 
-						alert("Auto-booked the slot as it was within 10 days of the current date", bot, chatID)
-					} else {
-						log.Printf("Did not proceed with autobook as time till event was %f \n", dayProper.Sub(time.Now()).Hours())
-					}
-
-				}
+					}*/ //don't autobook
 			}
 		}
 
