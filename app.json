@@ -1,0 +1,7 @@
+{
+  "name": "Automated Bukit Batok Driving Centre (BBDC) Booking System Bot",
+  "description": "Bot that periodically checks BBDC website for a pre-defined slot and alerts you through Telegram when it becomes available.",
+  "repository": "https://github.com/2gavy/bbdc-bot",
+  "logo": "https://www.bbdc.sg/bbweb/Portals/0/logo.jpg",
+  "keywords": ["go"]
+}

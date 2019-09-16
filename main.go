@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -17,7 +18,7 @@ import (
 )
 
 func main() {
-	//loadEnvironmentalVariables()
+	// loadEnvironmentalVariables()
 
 	//log to file as well as stdout
 	f, err := os.OpenFile("output.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -75,7 +76,7 @@ func main() {
 		resp, err := client.Do(req)
 		errCheck(err, "Error fetching booking slots")
 		body, _ := ioutil.ReadAll(resp.Body)
-		//ioutil.WriteFile("booking.txt", body, 0644)
+		ioutil.WriteFile("booking.txt", body, 0644)
 
 		//parse booking page to get booking dates
 		//The data is hidden away in the following function call in the HTML page
@@ -84,33 +85,31 @@ func main() {
 		log.Println("Parsing booking page")
 		foundSlot := false
 		substrs := strings.Split(string(body), "doTooltipV(")[1:]
+
 		for _, substr := range substrs {
 			bookingData := strings.Split(substr, ",")[0:6]
 			day := bookingData[2]
-			monthInt := day[5:7]
-
-			sessionNum := bookingData[3]
-			validSlot := false
-			if (strings.Contains(day, "Sat") || strings.Contains(day, "Sun")) && (monthInt == "02" || monthInt == "03" || monthInt == "04" || monthInt == "05") {
-				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
-					bot, chatID)
-				foundSlot = true
-				validSlot = true
-			} else if (monthInt == "02" || monthInt == "03" || monthInt == "04") && (sessionNum == "\"7\"" || sessionNum == "\"8\"") {
-				alert("Slot available on "+day+" from "+bookingData[4]+" to "+bookingData[5],
-					bot, chatID)
-				foundSlot = true
-				validSlot = true
-			}
+			// monthInt := day[5:7]
+			fmt.Println("Available slots, %v", bookingData)
+			alert("Available slot on "+day+" from "+bookingData[4]+" to "+bookingData[5],
+				bot, chatID)
+			validSlot := true
+			// if (strings.Contains(day, "Sat")) && (monthInt == "09" || monthInt == "10" || monthInt == "11" || monthInt == "12") {
+			// 	alert("Slot that matches condition (09, 10, 11, 12, Saturdays) on "+day+" from "+bookingData[4]+" to "+bookingData[5],
+			// 		bot, chatID)
+			// 	foundSlot = true
+			// 	validSlot = true
+			// }
 
 			if validSlot {
 				//Check if the slot found is within 10 days to determine whether to auto book
 				layout := "02/01/2006"
 				dayProper, err := time.Parse(layout, strings.Split(strings.Split(day, "\"")[1], " ")[0])
+
 				errCheck(err, "Error parsing date of slot")
 				daysFromNow := int(dayProper.Sub(time.Now()).Hours()/24) + 1
-
-				if daysFromNow <= 10 {
+				daysToLookAhead, err := strconv.Atoi(os.Getenv("DAYSTOLOOKAHEAD"))
+				if daysFromNow <= daysToLookAhead {
 					//if the slot is today
 					//note dayProper will be at midnight of the date given
 					//so the current time will actually ahead of the day of the slot
@@ -136,11 +135,13 @@ func main() {
 						errCheck(err, "Error creating booking slot")
 						log.Println("Finished booking slot")
 
-						alert("Auto-booked the slot as it was within 10 days of the current date", bot, chatID)
+						alert("Auto-booked slot, "+day+" from "+bookingData[4]+" to "+bookingData[5]+"because the slot as it was within 10 days of the current date. Please visit http://www.bbdc.sg/bbweb/default.aspx to verify!", bot, chatID)
 					} else {
-						log.Printf("Did not proceed with autobook as time till event was %f \n", dayProper.Sub(time.Now()).Hours())
+						log.Printf("Did not proceed with autobook as time till event was %f hours away \n", dayProper.Sub(time.Now()).Hours())
 					}
-
+				} else {
+					alert("Did not book slot on "+day+" from "+bookingData[4]+" to "+bookingData[5]+" because date is "+strconv.Itoa(daysFromNow)+" days away.",
+						bot, chatID)
 				}
 			}
 		}
@@ -151,9 +152,18 @@ func main() {
 			log.Println("No slots found")
 		}
 		r := rand.Intn(300) + 120
+		s := fmt.Sprint(time.Duration(r) * time.Second)
+		alert("Retrigger in: "+s, bot, chatID)
+		time.AfterFunc(30*time.Second, ping)
 		time.Sleep(time.Duration(r) * time.Second)
 	}
+}
 
+func ping() {
+	resp, err := http.Get(os.Getenv("HEROKU_LINK"))
+	fmt.Printf("%v", resp)
+	errCheck(err, "Error")
+	log.Println("Pinged ")
 }
 
 func alert(msg string, bot *tgbotapi.BotAPI, chatID int64) {
@@ -191,30 +201,23 @@ func paymentForm(slotID string) url.Values {
 func bookingForm() url.Values {
 	bookingForm := url.Values{}
 	bookingForm.Add("accId", os.Getenv("ACCOUNT_ID"))
-	bookingForm.Add("Month", "Feb/2019")
-	bookingForm.Add("Month", "Mar/2019")
-	bookingForm.Add("Month", "Apr/2019")
-	bookingForm.Add("Month", "May/2019")
-	bookingForm.Add("Month", "Jun/2019")
-	bookingForm.Add("Session", "1")
-	bookingForm.Add("Session", "2")
-	bookingForm.Add("Session", "3")
-	bookingForm.Add("Session", "4")
-	bookingForm.Add("Session", "5")
-	bookingForm.Add("Session", "6")
-	bookingForm.Add("Session", "7")
-	bookingForm.Add("Session", "8")
-	bookingForm.Add("allSes", "on")
-	bookingForm.Add("Day", "2")
-	bookingForm.Add("Day", "3")
-	bookingForm.Add("Day", "4")
-	bookingForm.Add("Day", "5")
-	bookingForm.Add("Day", "6")
-	bookingForm.Add("Day", "7")
-	bookingForm.Add("Day", "1")
-	bookingForm.Add("allDay", "")
+	months := strings.Split(os.Getenv("WANTED_MONTHS"), ",")
+
+	sessions := strings.Split(os.Getenv("WANTED_SESSIONS"), ",")
+	days := strings.Split(os.Getenv("WANTED_DAYS"), ",")
+	for _, month := range months {
+		bookingForm.Add("Month", month)
+	}
+	for _, session := range sessions {
+		bookingForm.Add("Session", session)
+	}
+	for _, day := range days {
+		bookingForm.Add("Day", day)
+	}
 	bookingForm.Add("defPLVenue", "1")
 	bookingForm.Add("optVenue", "1")
+
+	log.Printf("Looking through booking form for %s, for %s sessions, for these days %s (where 7 = Saturday etc.)", strings.Join(months, " "), strings.Join(sessions, " "), strings.Join(days, " "))
 
 	return bookingForm
 }

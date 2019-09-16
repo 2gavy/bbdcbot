@@ -5,3 +5,5 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 )
+
+go 1.13
