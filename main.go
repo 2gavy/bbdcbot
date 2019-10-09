@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -21,13 +20,13 @@ func main() {
 	// loadEnvironmentalVariables()
 
 	//log to file as well as stdout
-	f, err := os.OpenFile("output.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
-	defer f.Close()
-	mw := io.MultiWriter(os.Stdout, f)
-	log.SetOutput(mw)
+	// f, err := os.OpenFile("output.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	// if err != nil {
+	// 	log.Fatalf("error opening file: %v", err)
+	// }
+	// defer f.Close()
+	// mw := io.MultiWriter(os.Stdout, f)
+	// log.SetOutput(mw)
 
 	//set up telegram info
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("TELEGRAM_TOKEN"))
