@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	// loadEnvironmentalVariables()
+	loadEnvironmentalVariables()
 
 	//log to file as well as stdout
 	// f, err := os.OpenFile("output.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -180,7 +180,7 @@ func loadEnvironmentalVariables() {
 }
 
 func fetchCookies() (*http.Cookie, *http.Cookie) {
-	resp, err := http.Get("http://www.bbdc.sg/bbweb/default.aspx")
+	resp, err := http.Get(os.Getenv("BBDC_LINK"))
 	errCheck(err, "Error fetching cookies")
 	aspxanon := resp.Cookies()[0]
 	resp, err = http.Get("http://www.bbdc.sg/bbdc/bbdc_web/newheader.asp")
